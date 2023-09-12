@@ -1,17 +1,17 @@
 // Importação de módulos
 import { Router } from 'express';
-import { StatusCodes } from 'http-status-codes';
-import { TesteController } from '../controllers';
+import { UsuarioController } from '../controllers';
 
 
 const rotiador = Router();
 
 
-rotiador.get('/', (_, response) => {
-    return response.status(StatusCodes.OK).send('Loja Virtal');
-});
-
-rotiador.post('/teste', TesteController.validar, TesteController.testar);
+// Rotas de controle de usuários
+rotiador.post('/usuarios', UsuarioController.validarCadastrar, UsuarioController.cadastrar);
+rotiador.delete('/usuarios/:id', UsuarioController.validarDeletar, UsuarioController.deletar);
+rotiador.put('/usuarios/:id', UsuarioController.validarAtualizar, UsuarioController.atualizar);
+rotiador.get('/usuarios/', UsuarioController.validarBuscarTodos, UsuarioController.buscarTodos);
+rotiador.get('/usuarios/:id', UsuarioController.validarBuscarPorId, UsuarioController.buscarPorId);
 
 
 export { rotiador };
