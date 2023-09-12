@@ -3,6 +3,7 @@ import 'dotenv/config';
 import cors from 'cors';
 import morgan from 'morgan';
 import express from 'express';
+import './services/YupService';
 import { rotiador } from './routes';
 
 
