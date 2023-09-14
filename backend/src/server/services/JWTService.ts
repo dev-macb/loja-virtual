@@ -3,26 +3,27 @@ import * as jwt from 'jsonwebtoken';
 
 
 interface IDados {
-    uid: number;
+    id: string;
+    administrador: boolean;
 }
 
 
-const gerar = (dados: IDados): string | 'APP_SEGREDO_JWT_NAO_ENCONTRADO' => {
-    if(!process.env.APP_SEGREDO_JWT) return 'APP_SEGREDO_JWT_NAO_ENCONTRADO';
+const gerar = (dados: IDados): string | 'JWT_SEGREDO_NAO_ENCONTRADO' => {
+    if(!process.env.JWT_SEGREDO) return 'JWT_SEGREDO_NAO_ENCONTRADO';
     
     return jwt.sign(
         dados, 
-        process.env.APP_SEGREDO_JWT,
-        { expiresIn: '8h'}
+        process.env.JWT_SEGREDO,
+        { expiresIn: '1h'}
     );
 };
 
 
-const autenticar = (token: string): IDados | 'TOKEN_INVALIDO' | 'APP_SEGREDO_JWT_NAO_ENCONTRADO' => {
-    if(!process.env.APP_SEGREDO_JWT) return 'APP_SEGREDO_JWT_NAO_ENCONTRADO';
+const autenticar = (token: string): IDados | 'TOKEN_INVALIDO' | 'JWT_SEGREDO_NAO_ENCONTRADO' => {
+    if(!process.env.JWT_SEGREDO) return 'JWT_SEGREDO_NAO_ENCONTRADO';
 
     try {
-        const decoded = jwt.verify(token, process.env.APP_SEGREDO_JWT);
+        const decoded = jwt.verify(token, process.env.JWT_SEGREDO);
 
         if(typeof decoded === 'string') return 'TOKEN_INVALIDO';
         else return decoded as IDados;

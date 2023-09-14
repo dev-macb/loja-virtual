@@ -35,13 +35,13 @@ const cadastrar = async (request: Request<{}, {}, IBodyProps>, response: Respons
     
     // Regras de negócio
     const cpfValido = CPFService.validar(dados.cpf);
-    if (!cpfValido) return response.sendStatus(400).json({ erro: 'CPF inválido' });
+    if (!cpfValido) return response.status(StatusCodes.BAD_REQUEST).json({ erro: 'CPF inválido' });
 
     const cpfExistente = await Usuario.findOne({ cpf: dados.cpf });
-    if (cpfExistente) return response.sendStatus(400).json({ erro: 'CPF já restridado.' });
+    if (cpfExistente) return response.status(StatusCodes.BAD_REQUEST).json({ erro: 'CPF já registrado.' });
 
-    const usuarioExistente = await Usuario.findOne({ email: dados.email });
-    if (usuarioExistente) return response.sendStatus(400).json({ erro: 'E-mail já restridado.' });
+    const emailExistente = await Usuario.findOne({ email: dados.email });
+    if (emailExistente) return response.status(StatusCodes.BAD_REQUEST).json({ erro: 'E-mail já registrado.' });
 
     const hash = await HashService.criptografar(dados.senha);
 
