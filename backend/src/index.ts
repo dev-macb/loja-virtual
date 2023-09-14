@@ -13,9 +13,9 @@ function banner() {
 
 const iniciarServidor = () => {
     banner();
-    servidor.listen(process.env.PORTA || 3333, () => {
+    servidor.listen(process.env.APP_PORTA || 3333, () => {
         console.log('[*] O servidor HTTP está rodando...');
-        console.log(`[*] Aplicação escutando em 127.0.0.1 : ${process.env.PORTA || 3333}\n`);
+        console.log(`[*] Aplicação escutando em 127.0.0.1 : ${process.env.APP_PORTA || 3333}\n`);
     });
 };
 
