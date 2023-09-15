@@ -16,7 +16,7 @@ servidor.use('/api', rotiador);
 servidor.use(express.urlencoded({ extended: true }));
 
 mongoose.Promise = Promise;
-mongoose.connect('mongodb+srv://'+process.env.DB_USER+':'+process.env.DB_PASS+'@cluster0.fl9oocf.mongodb.net/?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://'+process.env.DB_USER+':'+process.env.DB_PASS+'@lojavirtual.h58flkg.mongodb.net/?retryWrites=true&w=majority');
 mongoose.connection.on('error', (erro: Error) => console.log(erro));
 
 

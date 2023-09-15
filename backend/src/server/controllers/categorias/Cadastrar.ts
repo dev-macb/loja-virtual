@@ -27,10 +27,10 @@ const cadastrar = async (request: Request<{}, {}, IBodyProps>, response: Respons
     const categoriaExistente = await Categoria.findOne({ nome: dados.nome });
     if (categoriaExistente) return response.status(StatusCodes.BAD_REQUEST).json({ erro: 'Categoria já registrada.' });
 
-    const novoCategoria = await new Categoria(dados).save().then((categoria) => categoria.toObject());
-    if (!novoCategoria) return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ erro: 'Falha interna do servidor' });
+    const novaCategoria = await new Categoria(dados).save().then((categoria) => categoria.toObject());
+    if (!novaCategoria) return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ erro: 'Falha interna do servidor' });
 
-    return response.status(StatusCodes.CREATED).json({ id: novoCategoria._id }).end();
+    return response.status(StatusCodes.CREATED).json({ id: novaCategoria._id }).end();
 };
 
 
